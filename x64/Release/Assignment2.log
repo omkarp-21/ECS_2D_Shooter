@@ -1,0 +1,49 @@
+﻿  Game.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\xutility(506,82): warning C4244: 'argument': conversion from '_Ty' to 'const float', possible loss of data
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\xutility(506,82): warning C4244:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\xutility(506,82): warning C4244:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\xutility(506,82): warning C4244:             _Ty=int
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\xutility(506,82): warning C4244:         ]
+  (compiling source file 'Game.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\xutility(506,82):
+      the template instantiation context (the oldest one first) is
+          C:\Code\GameDev\Assignment2\Assignment2\Game.cpp(151,28):
+          see reference to function template instantiation 'std::shared_ptr<CTransform> std::make_shared<CTransform,Vec2,Vec2,int>(Vec2 &&,Vec2 &&,int &&)' being compiled
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(2903,46):
+          see reference to function template instantiation 'std::_Ref_count_obj2<CTransform>::_Ref_count_obj2<_Ty,_Ty,int>(_Ty &&,_Ty &&,int &&)' being compiled
+          with
+          [
+              _Ty=Vec2
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(2092,18):
+          see reference to function template instantiation 'void std::_Construct_in_place<_Ty,Vec2,Vec2,int>(_Ty &,Vec2 &&,Vec2 &&,int &&) noexcept(false)' being compiled
+          with
+          [
+              _Ty=CTransform
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\xutility(506,82): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'Game.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\xutility(506,82):
+      the template instantiation context (the oldest one first) is
+          C:\Code\GameDev\Assignment2\Assignment2\Game.cpp(153,24):
+          see reference to function template instantiation 'std::shared_ptr<CShape> std::make_shared<CShape,int&,int&,sf::Color,sf::Color,int&>(int &,int &,sf::Color &&,sf::Color &&,int &)' being compiled
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(2903,46):
+          see reference to function template instantiation 'std::_Ref_count_obj2<CShape>::_Ref_count_obj2<int&,int&,_Ty,_Ty,int&>(int &,int &,_Ty &&,_Ty &&,int &)' being compiled
+          with
+          [
+              _Ty=sf::Color
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\memory(2092,18):
+          see reference to function template instantiation 'void std::_Construct_in_place<_Ty,int&,int&,sf::Color,sf::Color,int&>(_Ty &,int &,int &,sf::Color &&,sf::Color &&,int &) noexcept(false)' being compiled
+          with
+          [
+              _Ty=CShape
+          ]
+  
+  Generating code
+  8 of 418 functions ( 1.9%) were compiled, the rest were copied from previous compilation.
+    2 functions were new in current compilation
+    2 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  Assignment2.vcxproj -> C:\Code\GameDev\Assignment2\x64\Release\Assignment2.exe
