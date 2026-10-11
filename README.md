@@ -87,15 +87,15 @@ How a frame flows through `Game::run()`:
 
 ## Tech stack
 
-| Area | Technology |
-|---|---|
-| Language | C++17 (`LanguageStandard` = `stdcpp17` in `Assignment2.vcxproj`) |
+| Area                          | Technology                                                                                                                                         |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Language                      | C++17 (`LanguageStandard` = `stdcpp17` in `Assignment2.vcxproj`)                                                                                   |
 | Rendering / windowing / input | SFML 2.6.2 (`sfml-graphics`, `sfml-window`, `sfml-system`; `sfml-audio` and `sfml-network` also linked but no audio/network calls exist in source) |
-| Build | Visual Studio 2022 (PlatformToolset `v143`), `Assignment2.vcxproj` + `.filters`; Debug/Release × Win32/x64 configurations |
-| Math | Hand-rolled `Vec2` (`Vec2.hpp` / `Vec2.cpp`) |
-| Config | Plain-text key-value `config.txt`, parsed with `ifstream` in `Game::init()` |
-| Font asset | `fonts/arial.ttf` |
-| Tests / CI / packaging | None in the repository |
+| Build                         | Visual Studio 2022 (PlatformToolset `v143`), `Assignment2.vcxproj` + `.filters`; Debug/Release × Win32/x64 configurations                          |
+| Math                          | Hand-rolled `Vec2` (`Vec2.hpp` / `Vec2.cpp`)                                                                                                       |
+| Config                        | Plain-text key-value `config.txt`, parsed with `ifstream` in `Game::init()`                                                                        |
+| Font asset                    | `fonts/arial.ttf`                                                                                                                                  |
+| Tests / CI / packaging        | None in the repository                                                                                                                             |
 
 ## Project structure
 
@@ -137,8 +137,8 @@ Steps:
    - set the `SFML_DIR` environment variable to that root, or
    - copy `Directory.Build.props.sample` to `Directory.Build.props` (git-ignored)
      and set `<SFML_DIR>` in it.
-   Building without `SFML_DIR` fails fast with an explicit error instead of
-   resolving to a wrong installation.
+     Building without `SFML_DIR` fails fast with an explicit error instead of
+     resolving to a wrong installation.
 3. Build (`Ctrl+Shift+B` in Visual Studio, or the `msbuild` command above with
    `Debug` or `Release`). The executable lands at
    `x64\Release\Assignment2.exe` (or `x64\Debug\Assignment2.exe`); both
@@ -170,13 +170,13 @@ Enemy 32 32 3 3 255 255 255 2 3 8 90 60
 Bullet 10 10 20 255 255 255 255 255 255 2 20 90
 ```
 
-| Line | Fields | Meaning |
-|---|---|---|
-| `Window` | width, height, frame-limit, fullscreen-flag | `1280×720 @ 60 fps`. The fullscreen flag is parsed but the `create()` call has the fullscreen branch commented out, so windowed mode is always used. |
-| `Font` | path, size, R G B | HUD font and color. Missing/unreadable file prints `Could Not load Font!` and exits with `-1`. |
-| `Player` | SR CR S FR FG FB OR OG OB OT V | Shape radius, collision radius, speed, fill RGB, outline RGB, outline thickness, polygon vertex count. Shipped: radius 32, speed 5, dark fill `(5,5,5)`, red outline, 8 vertices. |
-| `Enemy` | SR CR SMIN SMAX OR OG OB OT VMIN VMAX L SI | Shape/collision radii, speed range, outline RGB/thickness, vertex-count range, lifespan (frames), spawn interval (frames). Shipped: random 3–8 vertices, lifespan 90, spawn every 60 frames. |
-| `Bullet` | SR CR S FR FG FB OR OG OB OT V L | Shape/collision radii, speed, fill/outline colors, outline thickness, vertex count, lifespan (frames). Shipped: speed 20, lifespan 90. |
+| Line     | Fields                                      | Meaning                                                                                                                                                                                      |
+| -------- | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Window` | width, height, frame-limit, fullscreen-flag | `1280×720 @ 60 fps`. The fullscreen flag is parsed but the `create()` call has the fullscreen branch commented out, so windowed mode is always used.                                         |
+| `Font`   | path, size, R G B                           | HUD font and color. Missing/unreadable file prints `Could Not load Font!` and exits with `-1`.                                                                                               |
+| `Player` | SR CR S FR FG FB OR OG OB OT V              | Shape radius, collision radius, speed, fill RGB, outline RGB, outline thickness, polygon vertex count. Shipped: radius 32, speed 5, dark fill `(5,5,5)`, red outline, 8 vertices.            |
+| `Enemy`  | SR CR SMIN SMAX OR OG OB OT VMIN VMAX L SI  | Shape/collision radii, speed range, outline RGB/thickness, vertex-count range, lifespan (frames), spawn interval (frames). Shipped: random 3–8 vertices, lifespan 90, spawn every 60 frames. |
+| `Bullet` | SR CR S FR FG FB OR OG OB OT V L            | Shape/collision radii, speed, fill/outline colors, outline thickness, vertex count, lifespan (frames). Shipped: speed 20, lifespan 90.                                                       |
 
 Enemy fill color is randomized per spawn (`Game.cpp:354`); enemy score equals
 `vertexCount × 100` (`Game.cpp:370`).
@@ -185,13 +185,13 @@ Enemy fill color is randomized per spawn (`Game.cpp:354`); enemy score equals
 
 Launch the game, then:
 
-| Input | Action |
-|---|---|
+| Input                 | Action                                                                  |
+| --------------------- | ----------------------------------------------------------------------- |
 | `W` / `A` / `S` / `D` | Move up / left / down / right (diagonals normalized via 45° projection) |
-| Left mouse click | Fire a normal bullet toward the cursor |
-| Right mouse click | Fire a ricocheting special bullet toward the cursor |
-| `P` | Pause / resume simulation |
-| `Esc` or window close | Quit |
+| Left mouse click      | Fire a normal bullet toward the cursor                                  |
+| Right mouse click     | Fire a ricocheting special bullet toward the cursor                     |
+| `P`                   | Pause / resume simulation                                               |
+| `Esc` or window close | Quit                                                                    |
 
 Rules implemented in `sCollision()` (`Game.cpp:98`):
 
@@ -202,35 +202,3 @@ Rules implemented in `sCollision()` (`Game.cpp:98`):
   (normal bullets only) expire on impact.
 - Special bullets bounce off walls instead of leaving the arena; normal bullets
   and small-enemy fragments expire via `CLifespan`.
-
-## Testing
-
-No test framework, test files, or CI workflows are present in the repository.
-Verification for this documentation was limited to static inspection of all
-source files, `config.txt`, and the `.vcxproj`.
-
-## Limitations and future work
-
-- **Build artifacts are committed** — `x64/Debug` and `x64/Release` (`.obj`,
-  `.pdb`, `.log`, `.tlog`, `.recipe` files) are checked in. They are generated
-  output; a `.gitignore` excluding them has not been added (doing so is left as
-  a manual step since modifying repo state beyond docs was out of scope).
-- **Windows-only, hardcoded SFML path** — the project expects SFML at
-  `C:\libraries\SFML-2.6.2` and only the x64 configurations wire up SFML paths.
-  There is no CMake, vcpkg manifest, or portable build script.
-- **No tests or CI** — behavior described above comes from code inspection, not
-  executed test runs.
-- **Latent code issues visible on inspection** (not fixed — docs task only):
-  `Vec2::operator!=` (`Vec2.cpp:13`) duplicates the `==` logic; `Vec2::dist`
-  and the default `Vec2()` constructor are declared but never defined;
-  `spawnBullet`/`spawnSpecialMove` pass `FR` for the blue fill channel instead
-  of `FB` (`Game.cpp:378`); the fullscreen config flag is parsed but unused.
-- **No license file** — no `LICENSE` or license header was found, so no license
-  is stated here.
-
-## Contributing
-
-This is a small single-project repository with no contribution guide, issue
-templates, or CI checks. Sensible defaults: keep changes scoped to one system
-at a time, match the existing C++ style, tune gameplay via `config.txt` rather
-than magic numbers, and do not commit `x64/` build output.
