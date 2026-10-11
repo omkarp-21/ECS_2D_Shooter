@@ -1,0 +1,30 @@
+flowchart TB
+    Main["main.cpp<br/>seeds RNG, constructs Game"]
+    Config["config.txt<br/>Window / Font / Player / Enemy / Bullet"]
+    FontFile["fonts/arial.ttf<br/>HUD typeface"]
+
+    subgraph App["ECS_2D_Shooter (this repo)"]
+        Game["Game<br/>owns window + EntityManager<br/>runs frame loop"]
+        Systems["Systems<br/>sEnemySpawner / sMovement<br/>sCollision / sLifespan<br/>sUserInput / sRender"]
+        EM["EntityManager<br/>deferred spawn queue<br/>tag-indexed lookup + sweep"]
+        Entities["Entities [Player, Enemy, Bullet, SpecialBullet]<br/>CTransform / CShape / CCollision<br/>CScore / CLifespan / CInput"]
+        Vec2["Vec2<br/>2D position + velocity math"]
+    end
+
+    subgraph SFML["SFML 2.6.2 (external)"]
+        Window["sf::RenderWindow<br/>frame-limited surface"]
+        Events["sf::Event<br/>keys + mouse"]
+        Graphics["sf::CircleShape / Font / Text<br/>draw + score HUD"]
+    end
+
+    Main --> Game
+    Config --> Game
+    FontFile --> Game
+    Game --> Systems
+    Systems --> EM
+    EM --> Entities
+    Entities --> Vec2
+    Systems <--> Window
+    Events --> Systems
+    Systems --> Graphics
+    Graphics --> Window

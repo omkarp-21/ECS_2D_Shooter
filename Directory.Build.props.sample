@@ -1,0 +1,15 @@
+<!-- Local developer override for the SFML dependency (NOT tracked by Git).
+     To use it:
+       1. Copy this file to "Directory.Build.props" in the same folder
+          as Assignment2.vcxproj.
+       2. Set SFML_DIR to the root of your SFML 2.6.2 installation for
+          MSVC x64 (the folder that contains "include\" and "lib\").
+       3. "Directory.Build.props" is git-ignored, so your local path is
+          never committed. Alternatively, pass
+          /p:SFML_DIR="<path>" to msbuild or set the SFML_DIR
+          environment variable instead of using this file. -->
+<Project>
+  <PropertyGroup>
+    <SFML_DIR>C:\libraries\SFML-2.6.2</SFML_DIR>
+  </PropertyGroup>
+</Project>
